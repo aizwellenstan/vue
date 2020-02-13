@@ -1,0 +1,20 @@
+# ignore directory
+examples/
+public/
+bin/
+build/
+test-dist/
+build-scripts/
+.temp
+
+# ignore files
+vue.config.js
+babel.config.js
+.gitignore
+.eslintrc.js
+.eslintignore
+.editorconfig
+.browserslistrc
+.env
+.env.prod
+postcss.config.js

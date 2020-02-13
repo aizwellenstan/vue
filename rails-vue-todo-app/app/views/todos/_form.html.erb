@@ -1,0 +1,17 @@
+<%= content_tag :div,
+  id: 'todo-form',
+  data: {
+    todo: todo.to_json(except: [:created_at, :updated_at])
+  } do %>
+
+<label>Name</label>
+<input type="text" v-model="todo.text" />
+
+<label>Completed?</label>
+<input type="checkbox" v-model="todo.completed" />
+
+<div>
+  <button v-on:click="saveTodo">Save Todo</button>
+</div>
+
+<% end %>

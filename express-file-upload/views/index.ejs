@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <% include ./partials/header %>
+</head>
+  <body>
+    <% include ./partials/banner %>
+    <div class="mui-container">
+      <h1>Express Upload File Demo</h1>
+      <form action="/" method="POST" enctype="multipart/form-data">
+          <legend>Please upload a file</legend>
+          Select a file to upload:
+          <input type="file" name="myUploadFile" id="fileToUpload">
+          <!-- <input type="submit" value="Start Upload" name="submit"> -->
+          <button type="submit" class="mui-btn mui-btn--raised mui-btn--accent" name="submit">Start Upload</button>
+      </form>
+    </div>
+
+  </body>
+</html>

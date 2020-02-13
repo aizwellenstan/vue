@@ -1,0 +1,70 @@
+// Place all the styles related to the todos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-heading {
+  text-align: center;
+  padding: 0.25em 0;
+}
+
+.todo-page-wrapper {
+  max-width: 800px;
+  min-width: 400px;
+
+  .actions {
+    margin-top: 15px;
+  }
+
+  .filter-link {
+    cursor: pointer;
+    color: blue;
+  }
+
+  .todo, .todo-input {
+    padding: 20px;
+    background-color: #531aff;
+    color: white;
+    border: 0;
+    border-bottom: 5px solid #3900e6;
+  }
+
+  .todo { 
+    cursor: pointer;
+  }
+
+  .add-wrapper {
+    position: relative;
+  
+    .cancel-add {
+      position: absolute;
+      top: 17px;
+      right: 15px;
+      font-size: small;
+      color: red;
+      border: 1px solid red;
+      padding: 3px;
+      background-color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.75;
+  }
+
+  .delete-btn {
+    float: right;
+    color: red;
+    background-color: white;
+  }
+
+  .error {
+    margin-top: 0.5em;
+  }
+
+  .empty-list {
+    margin-top: 1em;
+  }
+}

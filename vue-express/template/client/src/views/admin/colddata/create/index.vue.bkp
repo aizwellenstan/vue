@@ -1,0 +1,401 @@
+<template>
+  <div>
+    <div class="el-card login-card text-primary fs-xl is-always-shadow">
+      <div class="el-card__header">Create ColdData</div>
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+      <div v-if="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+      <form v-if="!signingUp" @submit.prevent="signup">
+        <div class="form-group">
+          <div class="el-form-item">
+            <label class="el-form-item__label">ParentId</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input
+                  id="username"
+                  v-model="colddata.parentId"
+                  type="text"
+                  class="el-input__inner"
+                  aria-describedby="usernameHelp"
+                  placeholder="輸入使用者名稱"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="el-form-item">
+            <label class="el-form-item__label">ObjectId</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input
+                  id="username"
+                  v-model="colddata.objectId"
+                  type="text"
+                  class="el-input__inner"
+                  aria-describedby="usernameHelp"
+                  placeholder="輸入使用者名稱"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding-top: 21px">
+          <button type="submit" class="btn-cyan">Submit</button>
+        </div>
+      </form>
+    </div>
+  <!-- <div>
+    <div class="el-card login-card text-primary fs-xl is-always-shadow">
+      <div class="el-card__header">Create Account</div>
+      <div class="el-card__body">
+        <form class="el-form">
+          <div class="el-form-item">
+             <div v-if="errorMessage" class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+              </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">ユーザー名</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input
+                  id="username"
+                  v-model="user.username"
+                  type="text"
+                  class="el-input__inner"
+                  aria-describedby="usernameHelp"
+                  placeholder="Enter a username"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">パスワード</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input
+                  id="password"
+                  v-model="user.password"
+                  type="password"
+                  class="el-input__inner"
+                  aria-describedby="passwordHelp"
+                  placeholder="Password"
+                  required
+                  autocomplete="off"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">Confirmパスワード</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input
+                  id="confirmPassword"
+                  v-model="user.confirmPassword"
+                  type="password"
+                  class="el-input__inner"
+                  aria-describedby="confirmPasswordHelp"
+                  placeholder="Password"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">Last Name</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input type="password" autocomplete="off" class="el-input__inner">
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">First Name</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input type="password" autocomplete="off" class="el-input__inner">
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">Permission</label>
+            <el-select filterable placeholder="Select">
+              <el-option>1</el-option>
+              <el-option>2</el-option>
+              <el-option>3</el-option>
+            </el-select>
+          </div>
+
+          <div class="el-form-item">
+            <label class="el-form-item__label">Email</label>
+            <div class="el-form-item__content">
+              <div class="el-input">
+                <input type="password" autocomplete="off" class="el-input__inner">
+              </div>
+            </div>
+          </div>
+
+          <div class="el-form-item">
+            <div class="el-form-item__content">
+              <div class="d-flex jc-between">
+                <el-button type="submit">Submit</el-button>
+                &nbsp;&nbsp;
+                <a href="/login">ログイン</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+  </div>
+</template>
+
+<script>
+import api from '../../../../../api.js'
+// import Joi from 'joi'
+// const REGISTER_URL = 'http://192.168.1.77:7777/account/register/'
+const REGISTER_URL = api + '/CompanyId/ProductId/ProjectId/colddata'
+// const schema = Joi.object().keys({
+//   username: Joi.string().regex(/(^[a-zA-Z0-9_]+$)/).min(2).max(30)
+//     .required(),
+//   password: Joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(^[a-zA-Z0-9@\$=!:.#%]+$)/).trim().min(8).required(),
+//   confirmPassword: Joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(^[a-zA-Z0-9@\$=!:.#%]+$)/).trim().min(8).required()
+// })
+export default {
+  data: () => ({
+    signingUp: false,
+    errorMessage: '',
+    colddata: {
+      parentId: ''
+    },
+    isChecked: true
+  }),
+  watch: {
+    user: {
+      handler() {
+        this.errorMessage = ''
+        this.successMessage = ''
+      },
+      deep: true
+    }
+  },
+  methods: {
+    signup() {
+      this.errorMessage = ''
+      this.successMessage = ''
+      this.signingUp = true
+      fetch(REGISTER_URL, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+
+          "ParentId": 'Build001',
+          "ObjectId": 'camera0006',
+          "DisplayName": '網路攝影機6',
+          "ChartURL": 'http://220.128.216.143:3000/d/DAZGc75Zk/siemens_demo_all_sensor?orgId=1&from=now-7d&to=now&fullscreen&panelId=2818',
+          "Descriptor": '網路攝影機6',
+          "Status": '',
+          "Thumbnail": '\\Images\\Device\\Q1755-E.png',
+          "HotdataInfo": '[\r\n          {\r\n            "Key": "Unit",\r\n            "Language": " ",\r\n            "Value": "KW"\r\n          },\r\n          {\r\n            "Key": "name",\r\n            "Language": " ",\r\n            "Value": "power"\r\n          }\r\n        ]',
+          "PointControllerInfo": '[\r\n          {\r\n            "Key": "writelink",\r\n            "Language": " ",\r\n            "Value": "http:\/\/dasdsadsa\/"\r\n          },\r\n          {\r\n            "Key": "name",\r\n            "Language": " ",\r\n            "Value": "power"\r\n          }\r\n        ]',
+          "Information": '[\r\n          {\r\n            "Key": "",\r\n            "Language": " ",\r\n            "Value": ""\r\n          },\r\n          {\r\n            "Key": "\u8A2D\u5099\u540D\u7A31",\r\n            "Language": " ",\r\n            "Value": "Q1755\/-E"\r\n          },\r\n          {\r\n            "Key": "\u5EE0\u724C",\r\n            "Language": " ",\r\n            "Value": "AXIS"\r\n          },\r\n          {\r\n            "Key": "\u5F71\u50CF\u611F\u61C9\u5668",\r\n            "Language": " ",\r\n            "Value": "1\/3\u540B \u4E3B\u52D5\u5F0F\u6383\u63CFCMOS 2\u767E\u842C\u50CF\u7D20"\r\n          },\r\n          {\r\n            "Key": "\u5DE5\u4F5C\u96FB\u58D3",\r\n            "Language": " ",\r\n            "Value": "8\u201320 V DC max. 11,2 W; 20 - 24 V AC max"\r\n          },\r\n          {\r\n            "Key": "\u904B\u4F5C\u74B0\u5883",\r\n            "Language": " ",\r\n            "Value": "IPv4\/v6, HTTP, HTTPS*, QoS Layer 3 DiffServ, FTP, SMTP, Bonjour, UPnP, SNMPv1\/v2c\/v3(MIB-II), DNS, DynDNS, NTP, RTSP, RTP, TCP, UDP, IGMP, RTCP, ICMP, DHCP, ARP, SOCKS. \u4E26\u652F\u63F4\u5927\u591A\u6578\u7684PT\u904B\u93E1\u96F2\u53F0"\r\n          }\r\n        ]'
+
+        })
+      })
+      .then(res => res.json())
+            .then(parsedResponse => {
+                console.log(parsedResponse)
+                this.successMessage = parsedResponse.message
+            })
+      .then((result) => {
+        setTimeout(() => {
+          this.signingUp = false
+        }, 1000)
+      }).catch((error) => {
+        setTimeout(() => {
+          this.signingUp = false
+          // this.errorMessage = error.message
+        }, 1000)
+      })
+    }
+    // valid() {
+    //   if (this.isChecked === false) {
+    //     this.errorMessage = 'Please agree Terms of Use and Privacy Policy. 🙈';
+    //     return false;
+    //   }
+    //   if (this.user.password !== this.user.confirmPassword) {
+    //     this.errorMessage = 'Passwords must match. 🙈';
+    //     return false;
+    //   }
+    //   const result = Joi.validate(this.user, schema);
+    //   if (result.error === null) {
+    //     return true;
+    //   }
+    //   if (result.error.message.includes('username')) {
+    //     this.errorMessage = 'Username is invalid. 😭';
+    //   } else if(result.error.message.includes('password')) {
+    //     this.errorMessage = 'Password is invalid. 🙈';
+    //   } else {
+    //     console.log(result.error.message)
+    //   }
+    //   return false;
+    // },
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.logo {
+  width: 63px;
+  height: 32px;
+  margin-left: 76px;
+  margin-top: 20px;
+}
+.navbar {
+  height: 72px;
+  overflow: hidden;
+  position: relative;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  z-index: 1001;
+  .hamburger-container {
+    line-height: 46px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+    transition: background .3s;
+    -webkit-tap-highlight-color:transparent;
+    &:hover {
+      background: rgba(0, 0, 0, .025)
+    }
+  }
+  .breadcrumb-container {
+    float: left;
+  }
+  .errLog-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .right-menu {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+    &:focus {
+      outline: none;
+    }
+    .right-menu-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 18px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+      &.hover-effect {
+        cursor: pointer;
+        transition: background .3s;
+        &:hover {
+          background: rgba(0, 0, 0, .025)
+        }
+      }
+    }
+    .avatar-container {
+      margin-right: 30px;
+      .avatar-wrapper {
+        margin-top: 5px;
+        position: relative;
+        .user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+        .el-icon-caret-bottom {
+          cursor: pointer;
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+.form {
+  margin-top:72px;
+  padding-top:68px;
+  padding-left:377px;
+  padding-bottom: 0;
+  height: calc(100%-72px)
+}
+.lightblue {
+  color: #32d4d7
+}
+.tag {
+  font-size: 16px;
+  color: #666
+}
+.title {
+  font-size: 28px
+}
+.btn-cyan {
+  background-color: #32d4d7;
+  color: #fff;
+  width: 176px;
+  height: 40px
+}
+.btn-white {
+  background-color: #fff;
+  color: #32d4d7;
+  width: 223px;
+  height: 40px
+}
+.textbox{
+  -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    width: 400px;
+}
+.alert{
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  width: 571px
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+</style>

@@ -1,0 +1,349 @@
+@import '~normalize.css'
+@import '~prismjs/themes/prism.css'
+// @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700")
+//
+// variable
+// -----------------------------------------
+
+fontSize = 14px
+
+fontFamily = "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif
+monospaceFontFamily = "Ubuntu Mono" ,"PT Mono", Consolas, Monaco, Menlo, monospace
+
+bgColor = #fff
+textColor = #555
+linkColor = #08c
+metaColor = #888
+codeBgColor = #f7f7f7
+pageWidth = 800px
+
+//
+// common
+// -----------------------------------------
+
+/::-moz-selection,
+/::selection
+  background #B2D7FF
+
+body
+  // font
+  font-family fontFamily
+  font-size fontSize
+  line-height 2
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  -webkit-text-size-adjust none
+  // size
+  position relative
+  margin 0 auto
+  padding 0
+  background bgColor
+  color textColor
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  font-weight 400
+
+a
+  text-decoration none
+  color linkColor
+  overflow-wrap break-word
+  word-break break-all
+
+//
+// Shared
+// -----------------------------------------
+
+.header
+  text-align center
+  width: 100%;
+  border-top: 4px solid #eaeaea;
+  /* border-bottom: 4px solid #fafafa; */
+  background: #fff;
+  filter: none;
+  -webkit-box-shadow: 0 0px 0 0px rgba(0,0,0,.025), 0px 1px 0px rgba(0,0,0,.3);
+  -moz-box-shadow: 0 0px 0 0px rgba(0,0,0,.025), 0px 1px 0px rgba(0,0,0,.3);
+  box-shadow: 0 0px 0 0px rgba(0,0,0,.025), 0px 1px 0px rgba(0,0,0,.3);
+  .container
+    display: table;
+    max-width: pageWidth
+    width: pageWidth
+    margin: 0 auto;
+    .brand
+      font-size: 20px;
+      font-weight: 200;
+    a
+      float: left;
+      font-size fontSize + 2
+      position: relative;
+      padding: 20px 20px;
+      /* color: #a3a3a3; */
+      color: #000;
+      text-shadow: 0 1px 0 #ffffff;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      // letter-spacing 5px
+      // text-transform uppercase
+      color textColor
+    &>a
+      padding: 12px 20px
+    ul.nav
+      position: relative;
+      display: block;
+      float: right;
+      margin: 0 10px 0 0;
+      li
+        float: left;
+        list-style: none;
+        margin-top: -4px;
+        a.router-link-active, a:hover
+          border-top: 4px solid #F00;
+          background: #fafafa !important;
+          color: #bfbfbf;
+
+
+.searchbar-input
+  display block
+  margin 5px auto 0
+  width 150px
+  font-family fontFamily
+  text-align center
+  border none
+  background-color bgColor
+  color metaColor
+  &:hover,
+  &:focus,
+  &:active
+    outline none
+    background-color darken(bgColor, 2)
+    text-decoration none
+    color textColor
+
+.footer
+  margin-bottom 15px
+  text-align center
+  color metaColor
+  a
+    color metaColor
+    text-decoration underline
+
+//
+// List View
+// -----------------------------------------
+
+.list-view
+  margin 0 auto
+  width: pageWidth
+  ol,
+  ul
+    padding 0
+    list-style none
+
+.list-item
+  position relative
+  // margin-bottom 50px
+
+.item-title
+  display inline-block
+  margin-bottom 10px
+  font-size fontSize + 2
+  color #dd0000
+  margin-left: 1em;
+  &:hover
+    color linkColor
+
+.item-date
+  display inline-block
+  font-size fontSize - 2
+  color metaColor
+  // border-top 1px solid #ddd
+  padding-top 12px
+
+//
+// Post View
+// -----------------------------------------
+
+.post-view
+  margin 0 auto
+  width pageWidth
+  a:hover
+    border-bottom 1px dashed linkColor
+
+// when smaller than tablet
+@media (max-width: 767px)
+  .header .container
+    width: 95%
+    a
+      padding: 1em;
+    &>a
+      padding: 0.2em;
+  .list-view, .post-view
+    width: auto
+    padding: 0 .5em;
+    &>.list
+      margin-left: 0
+  .item-title
+    margin-left: 0.5em
+
+.post-date
+  float right
+  font-size fontSize - 2
+  font-weight 400
+  line-height 2
+  color metaColor
+
+pre
+  background codeBgColor !important
+  padding 16px
+  overflow-x auto
+  white-space pre
+
+code
+  background codeBgColor
+  font-family monospaceFontFamily !important
+
+blockquote
+  margin 0
+  padding 0 16px
+  border-left 4px solid #ddd
+
+.paginator a
+  padding: 0 4px;
+  margin: 2px;
+  text-decoration: none;
+  &.current-page
+    color: white;
+    background: #ff0000;
+
+// Asciidoc
+.admonitionblock .icon
+  display none
+
+.tip .content::before
+  content: 'Tip'
+.note .content::before
+  content: 'Note'
+.admonitionblock
+  font-size: 1rem;
+  font-style: italic;
+  padding: 0 1rem;
+  margin: 2.5rem 0;
+  position: relative;
+  .content
+    background-color: #fafeff;
+    border-top: 1px dotted #00a3d9;
+    border-bottom: 1px dotted #00a3d9;
+    border-left: 0 !important;
+    &::before
+      // content: 'Note';
+      padding: .2rem .5rem;
+      background: #00a3d9;
+      color: #fff;
+      position: absolute;
+      left: 0;
+      top: .25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,.2);
+      border-radius: 4px;
+      -webkit-transform: rotate(-5deg) translateX(-10px) translateY(-25px);
+      -moz-transform: rotate(-5deg) translateX(-10px) translateY(-25px);
+      -ms-transform: rotate(-5deg) translateX(-10px) translateY(-25px);
+      -o-transform: rotate(-5deg) translateX(-10px) translateY(-25px);
+      transform: rotate(-5deg) translateX(-10px) translateY(-25px);
+
+b.conum
+  counter-increment: notation-counter;
+  font-size: 0;
+
+b.conum:after, .colist>ol>li:before
+  display: inline-block;
+  content: counter(notation-counter);
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+  font-size: small;
+  background: #e85151;
+  color: #fff;
+  text-align: center;
+  line-height: 1rem;
+  vertical-align: middle;
+  font-weight: lighter;
+  font-family: Arial, sans-serif;
+
+.colist>ol
+  counter-reset: li;
+  li
+    counter-increment: notation-counter;
+    position: relative;
+    list-style: none;
+    &:before
+      content: counter(li);
+      counter-increment: li;
+      position: absolute;
+      left: -1.5rem;
+      top: .3rem;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      line-height: 1rem;
+
+.listingblock pre.highlightjs
+  padding: 1em
+
+.quoteblock blockquote:before
+  font-family: "Noto Serif", "DejaVu Serif", serif
+
+table.tableblock
+  overflow: auto
+  display: block
+  border-spacing: 0
+  border-collapse: collapse
+  border-width: 0
+  th, td
+    border: 1px solid #dfe2e5 !important
+
+.toc
+  ul
+    margin-bottom: 0
+.toc.md
+  counter-reset: toc-li-2
+  .toc-li-2
+    counter-reset: toc-li-3
+    &::before
+      counter-increment: toc-li-2
+      content: counter(toc-li-2) ". "
+  .toc-li-3
+      counter-reset: toc-li-4
+      &::before
+        counter-increment: toc-li-3
+        content: counter(toc-li-2) ". " counter(toc-li-3) ". "
+  .toc-li-4
+    counter-reset: toc-li-5
+    &::before
+      counter-increment: toc-li-4
+      content: counter(toc-li-2) ". " counter(toc-li-3) ". " counter(toc-li-4) ". "
+
+.post-view
+  counter-reset: h2
+  h2.md
+    counter-reset: h3
+    &::before
+      counter-increment: h2
+      content: counter(h2) ". "
+  h3.md
+      counter-reset: h4
+      &::before
+        counter-increment: h3
+        content: counter(h2) ". " counter(h3) ". "
+  h4.md
+    counter-reset: h5
+    &::before
+      counter-increment: h4
+      content: counter(h2) ". " counter(h3) ". " counter(h4) ". "
+

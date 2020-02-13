@@ -1,0 +1,24 @@
+{
+  "name": "vue-todo-app",
+  "private": true,
+  "scripts": {
+    "start": "foreman start -f Procfile.dev -p 3000",
+    "setup": "rails db:create db:migrate",
+    "reset": "rails db:drop db:create db:migrate"
+  },
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "bootstrap": "^4.2.1",
+    "vue": "^2.5.22",
+    "vue-loader": "14.2.2",
+    "vue-resource": "^1.5.1",
+    "vue-template-compiler": "^2.5.22",
+    "vue-turbolinks": "^2.0.4"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  },
+  "engines": {
+    "yarn": ">= 0.25.2"
+  }
+}
